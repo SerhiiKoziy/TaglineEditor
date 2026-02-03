@@ -1,0 +1,72 @@
+.button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+/* Base status - dark grey background, white text */
+.base {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.base:hover {
+  background: #3a3a3a;
+}
+
+.base.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Secondary status - dark blue background, lighter blue text */
+.secondary {
+  background: rgba(21, 123, 218, 0.2);
+  color: #56ADFF;
+}
+
+.secondary.active {
+  border: 1px solid #fff;
+}
+
+.secondary:hover {
+  background: #1e4a7f;
+}
+
+/* Primary status - vibrant blue background, white text */
+.primary {
+  background: rgba(21, 123, 218, 0.93);
+  color: #ffffff;
+}
+
+.primary.active {
+  border: 1px solid #fff;
+}
+
+.primary:hover {
+  background: #1d4ed8;
+}
+
+/* Outline status - dark grey background, white text, with border */
+.outline {
+  background: none;
+  color: #ffffff;
+  border: 1px solid #4a4a4a;
+}
+
+.outline.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.outline:hover {
+  background: none;
+  border-color: #5a5a5a;
+}

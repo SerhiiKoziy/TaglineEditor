@@ -1,0 +1,84 @@
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.tagline:hover {
+  opacity: 0.8;
+}
+
+/* Status styles - matching Button component */
+.base {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.secondary {
+  background: rgba(21, 123, 218, 0.2);
+  color: #56ADFF;
+}
+
+.primary {
+  background: rgba(21, 123, 218, 0.93);
+  color: #ffffff;
+}
+
+.outline {
+  background: none;
+  color: #ffffff;
+  border: 1px solid #4a4a4a;
+}
+
+/* Size variants */
+.sizeXL {
+  font-size: 18px;
+  padding: 12px 24px;
+}
+
+.sizeL {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.sizeM {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.sizeS {
+  font-size: 12px;
+  padding: 6px 12px;
+}
+
+.sizeXS {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+/* Radius variants */
+.radius0 {
+  border-radius: 0;
+}
+
+.radius4 {
+  border-radius: 4px;
+}
+
+.radius8 {
+  border-radius: 8px;
+}
+
+.radius12 {
+  border-radius: 12px;
+}
+
+.radius100 {
+  border-radius: 100px;
+}

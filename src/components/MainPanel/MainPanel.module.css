@@ -1,0 +1,94 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 8px 12px;
+  background: none;
+  border-radius: 6px;
+  border: none;
+  transition: all 0.2s;
+}
+
+.item:hover {
+  border-color: #4a4a4a;
+  background: #222222;
+}
+
+.itemLabel {
+  color: #ffffff;
+  cursor: pointer;
+  flex: 1;
+  font-size: 14px;
+}
+
+.itemLabel:hover {
+  color: #60a5fa;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.deleteButton:hover {
+  opacity: 1;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: transparent;
+  color: #9ca3af;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.addButton:hover {
+  border-color: #4a4a4a;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.plusIcon {
+  font-size: 18px;
+  line-height: 1;
+  color: #9ca3af;
+}
+
+.addButton:hover .plusIcon {
+  color: #ffffff;
+}
+
+.editIcon {
+  font-size: 16px;
+  opacity: 0.7;
+}

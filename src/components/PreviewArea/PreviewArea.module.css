@@ -1,0 +1,128 @@
+.previewArea {
+  flex: 1;
+  padding: 40px;
+  background: #1a1a1a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.container.alignLeft {
+  justify-content: flex-start;
+}
+
+.container.alignCenter {
+  justify-content: center;
+}
+
+.container.alignRight {
+  justify-content: flex-end;
+}
+
+.tag {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.tag:hover {
+  opacity: 0.8;
+}
+
+/* Style variants */
+.tagStyle1 {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+}
+
+.tagStyle2 {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.tagStyle3 {
+  background: transparent;
+  border-color: #3a3a3a;
+}
+
+.tagStyle4 {
+  background: #3a3a3a;
+  border-color: #4a4a4a;
+}
+
+/* Size variants */
+.tagSizeXL {
+  font-size: 18px;
+  padding: 12px 24px;
+}
+
+.tagSizeL {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.tagSizeM {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.tagSizeS {
+  font-size: 12px;
+  padding: 6px 12px;
+}
+
+.tagSizeXS {
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+/* Radius variants */
+.tagRadius0 {
+  border-radius: 0;
+}
+
+.tagRadius4 {
+  border-radius: 4px;
+}
+
+.tagRadius8 {
+  border-radius: 8px;
+}
+
+.tagRadius12 {
+  border-radius: 12px;
+}
+
+.tagRadius100 {
+  border-radius: 100px;
+}

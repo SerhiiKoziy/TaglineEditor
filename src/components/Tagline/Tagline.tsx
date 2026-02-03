@@ -13,7 +13,7 @@ interface TaglineProps {
 export const Tagline: React.FC<TaglineProps> = ({ label, link, style, size, radius }) => {
   // Map TagStyle to Button status
   const getStatus = (tagStyle: TagStyle): 'primary' | 'secondary' | 'outline' | 'base' => {
-    const styleMap = {
+    const styleMap: Record<TagStyle, 'primary' | 'secondary' | 'outline' | 'base'> = {
       style1: 'base',
       style2: 'secondary',
       style3: 'primary',
@@ -46,7 +46,7 @@ export const Tagline: React.FC<TaglineProps> = ({ label, link, style, size, radi
     return radiusMap[radius] || styles.radius8;
   };
 
-  const statusClass = styles[status];
+  const statusClass = styles[status as keyof typeof styles] || styles.base;
   const sizeClass = getSizeClass();
   const radiusClass = getRadiusClass();
 
@@ -56,6 +56,7 @@ export const Tagline: React.FC<TaglineProps> = ({ label, link, style, size, radi
       className={`${styles.tagline} ${statusClass} ${sizeClass} ${radiusClass}`}
       target="_blank"
       rel="noopener noreferrer"
+      draggable={false}
     >
       {label}
     </a>

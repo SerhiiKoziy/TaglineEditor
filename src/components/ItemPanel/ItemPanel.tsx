@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { useState, useEffect } from 'react';
 import { taglineStore } from '../../stores/taglineStore';
 import { Panel } from '../Panel/Panel';
+import { DEFAULT_LINK } from '../../constants';
 import styles from './ItemPanel.module.css';
 
 interface ItemPanelProps {
@@ -31,9 +32,9 @@ export const ItemPanel = observer(({ isCreating, itemId }: ItemPanelProps) => {
     if (!label.trim()) return;
 
     if (isCreating) {
-      addItem({ label: label.trim(), link: link.trim() || 'https://onepage.io' });
+      addItem({ label: label.trim(), link: link.trim() || DEFAULT_LINK });
     } else if (itemId) {
-      updateItem(itemId, { label: label.trim(), link: link.trim() || 'https://onepage.io' });
+      updateItem(itemId, { label: label.trim(), link: link.trim() || DEFAULT_LINK });
     }
   };
 

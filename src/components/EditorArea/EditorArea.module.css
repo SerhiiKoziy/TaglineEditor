@@ -2,9 +2,9 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 400px;
+  width: 300px;
   height: 100vh;
-  padding: 40px;
+  padding: 48px 12px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;

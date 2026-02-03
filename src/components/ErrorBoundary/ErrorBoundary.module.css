@@ -1,0 +1,43 @@
+.errorBoundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 20px;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.errorContent {
+  text-align: center;
+  max-width: 400px;
+}
+
+.errorTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #ff4444;
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: #cccccc;
+  margin: 0 0 20px 0;
+}
+
+.resetButton {
+  padding: 10px 20px;
+  background: rgba(21, 123, 218, 0.93);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.resetButton:hover {
+  opacity: 0.9;
+}

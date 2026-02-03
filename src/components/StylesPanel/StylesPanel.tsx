@@ -1,21 +1,16 @@
 import { observer } from 'mobx-react-lite';
 import { taglineStore } from '../../stores/taglineStore';
-import { TagStyle, TagSize, TagRadius, TagAlignment } from '../../types';
 import { Panel } from '../Panel/Panel';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { AlgLeftIcon } from '../Icon/AlgLeftIcon';
 import { AlgCenterIcon } from '../Icon/AlgCenterIcon';
 import { AlgRightIcon } from '../Icon/AlgRightIcon';
+import { TAG_STYLES, TAG_SIZES, TAG_RADII, TAG_ALIGNMENTS } from '../../constants';
 import styles from './StylesPanel.module.css';
 
 export const StylesPanel = observer(() => {
   const { style, size, radius, alignment, setStyle, setSize, setRadius, setAlignment } = taglineStore;
-
-  const stylesList: TagStyle[] = ['style1', 'style2', 'style3', 'style4'];
-  const sizes: TagSize[] = ['XL', 'L', 'M', 'S', 'XS'];
-  const radii: TagRadius[] = [0, 4, 8, 12, 100];
-  const alignments: TagAlignment[] = ['left', 'center', 'right'];
 
   const getStyleStatus = (index: number): 'primary' | 'secondary' | 'outline' | 'base' => {
     // Map each style button to its status based on position
@@ -37,7 +32,7 @@ export const StylesPanel = observer(() => {
         <div className={styles.section}>
           <label className={styles.sectionLabel}>Style</label>
           <div className={styles.buttonGroup}>
-            {stylesList.map((s, index) => (
+            {TAG_STYLES.map((s, index) => (
               <Button
                 key={s}
                 status={getStyleStatus(index)}
@@ -54,7 +49,7 @@ export const StylesPanel = observer(() => {
         <div className={styles.section}>
           <label className={styles.sectionLabel}>Size</label>
           <div className={styles.buttonGroup}>
-            {sizes.map((s) => (
+            {TAG_SIZES.map((s) => (
               <button
                 key={s}
                 className={`${styles.sizeButton} ${size === s ? styles.active : ''}`}
@@ -69,7 +64,7 @@ export const StylesPanel = observer(() => {
         <div className={styles.section}>
           <label className={styles.sectionLabel}>Radius</label>
           <div className={styles.buttonGroup}>
-            {radii.map((r) => (
+            {TAG_RADII.map((r) => (
               <button
                 key={r}
                 className={`${styles.radiusButton} ${radius === r ? styles.active : ''}`}
@@ -84,7 +79,7 @@ export const StylesPanel = observer(() => {
         <div className={styles.section}>
           <label className={styles.sectionLabel}>Alignment</label>
           <div className={styles.buttonGroupAlignment}>
-            {alignments.map((a) => (
+            {TAG_ALIGNMENTS.map((a) => (
               <button
                 key={a}
                 className={`${styles.alignmentButton} ${alignment === a ? styles.active : ''}`}

@@ -1,27 +1,87 @@
-import { makeAutoObservable } from 'mobx';
+import { makeObservable, observable, action } from 'mobx';
 import { TagItem, TagStyle, TagSize, TagRadius, TagAlignment, PanelType, TaglineConfig } from '../types';
+import { BaseStore } from './baseStore';
+import { apiService } from '../services/apiService';
+import { generateId } from '../utils/idGenerator';
+import { DEFAULT_TAGLINE_CONFIG, DEFAULT_LINK } from '../constants';
 
-class TaglineStore {
+class TaglineStore extends BaseStore {
   items: TagItem[] = [
-    { id: '1', label: 'Marketing', link: 'https://onepage.io' },
-    { id: '2', label: 'Design', link: 'https://onepage.io' },
-    { id: '3', label: 'Development', link: 'https://onepage.io' },
-    { id: '4', label: 'Front', link: 'https://onepage.io' },
-    { id: '5', label: 'AI Engineering', link: 'https://onepage.io' },
+    { id: '1', label: 'Marketing', link: DEFAULT_LINK },
+    { id: '2', label: 'Design', link: DEFAULT_LINK },
+    { id: '3', label: 'Development', link: DEFAULT_LINK },
+    { id: '4', label: 'Front', link: DEFAULT_LINK },
+    { id: '5', label: 'AI Engineering', link: DEFAULT_LINK },
   ];
 
-  style: TagStyle = 'style2';
-  size: TagSize = 'M';
-  radius: TagRadius = 8;
-  alignment: TagAlignment = 'left';
+  style: TagStyle = DEFAULT_TAGLINE_CONFIG.style;
+  size: TagSize = DEFAULT_TAGLINE_CONFIG.size;
+  radius: TagRadius = DEFAULT_TAGLINE_CONFIG.radius;
+  alignment: TagAlignment = DEFAULT_TAGLINE_CONFIG.alignment;
 
   currentPanel: PanelType = 'main';
   editingItemId: string | null = null;
   isCreatingItem = false;
   isEditorVisible = true;
 
+  private saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+
   constructor() {
-    makeAutoObservable(this);
+    super();
+    // Use makeObservable instead of makeAutoObservable for classes with superclass
+    // MUST be called immediately after super() and before any observable access
+    makeObservable(this, {
+      // Base class observables
+      isLoading: observable,
+      error: observable,
+      // TaglineStore observables
+      items: observable,
+      style: observable,
+      size: observable,
+      radius: observable,
+      alignment: observable,
+      currentPanel: observable,
+      editingItemId: observable,
+      isCreatingItem: observable,
+      isEditorVisible: observable,
+      // Actions
+      setStyle: action,
+      setSize: action,
+      setRadius: action,
+      setAlignment: action,
+      addItem: action,
+      updateItem: action,
+      deleteItem: action,
+      reorderItems: action,
+      openCreateItem: action,
+      closeCreateItem: action,
+      openEditItem: action,
+      closeEditItem: action,
+      openStyles: action,
+      closePanel: action,
+      setPanel: action,
+      toggleEditor: action,
+    });
+  }
+
+  // Initialize data after store creation - call this from App or after store instantiation
+  initialize() {
+    this.loadInitialData();
+  }
+
+  private async loadInitialData() {
+    const config = await this.executeWithErrorHandling(
+      () => apiService.loadTaglineConfig(),
+      'Failed to load tagline configuration'
+    );
+
+    if (config) {
+      this.items = config.items;
+      this.style = config.style;
+      this.size = config.size;
+      this.radius = config.radius;
+      this.alignment = config.alignment;
+    }
   }
 
   setStyle = (style: TagStyle) => {
@@ -47,7 +107,7 @@ class TaglineStore {
   addItem = (item: Omit<TagItem, 'id'>) => {
     const newItem: TagItem = {
       ...item,
-      id: Date.now().toString(),
+      id: generateId(),
     };
     this.items.push(newItem);
     this.saveToServer();
@@ -65,6 +125,11 @@ class TaglineStore {
 
   deleteItem = (id: string) => {
     this.items = this.items.filter((i) => i.id !== id);
+    this.saveToServer();
+  };
+
+  reorderItems = (newOrder: TagItem[]) => {
+    this.items = newOrder;
     this.saveToServer();
   };
 
@@ -110,15 +175,28 @@ class TaglineStore {
   };
 
   private saveToServer() {
-    const config: TaglineConfig = {
-      items: this.items,
-      style: this.style,
-      size: this.size,
-      radius: this.radius,
-      alignment: this.alignment,
-    };
-    console.log('POST http://api/tagline', config);
+    // Debounce rapid changes (e.g., during drag & drop)
+    if (this.saveDebounceTimer) {
+      clearTimeout(this.saveDebounceTimer);
+    }
+
+    this.saveDebounceTimer = setTimeout(async () => {
+      const config: TaglineConfig = {
+        items: this.items,
+        style: this.style,
+        size: this.size,
+        radius: this.radius,
+        alignment: this.alignment,
+      };
+
+      await this.executeWithErrorHandling(
+        () => apiService.saveTaglineConfig(config),
+        'Failed to save tagline configuration'
+      );
+    }, 300); // 300ms debounce
   }
 }
 
 export const taglineStore = new TaglineStore();
+// Initialize after store is created
+taglineStore.initialize();
